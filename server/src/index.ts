@@ -1,22 +1,6 @@
-import { Hono } from "hono";
-import { cors } from "hono/cors";
-import type { ApiResponse } from "shared/dist";
+export { app } from './app';
+export type { AppType, Client } from './client';
 
-export const app = new Hono()
+export { hcWithType } from './client';
 
-.use(cors())
-
-.get("/", (c) => {
-	return c.text("Hello Hono!");
-})
-
-.get("/hello", async (c) => {
-	const data: ApiResponse = {
-		message: "Hello BHVR!",
-		success: true,
-	};
-
-	return c.json(data, { status: 200 });
-});
-
-export default app;
+export { app as default } from './app';

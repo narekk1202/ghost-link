@@ -8,6 +8,7 @@
     "dev": "bun --watch run src/index.ts && tsc --watch"
   },
   "dependencies": {
+    "@upstash/redis": "^1.35.7",
     "hono": "^4.10.8",
     "shared": "workspace:*"
   },

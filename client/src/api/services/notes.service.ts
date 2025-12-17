@@ -3,6 +3,9 @@ import {
 	encryptData,
 	exportKeyToBase64,
 	generateSymmetricKey,
+	importKeyFromBase64,
+	base64ToBuffer,
+	decryptData,
 } from '@/utils/crypto';
 import { client } from '../hono-client';
 
@@ -26,8 +29,24 @@ class NotesService {
 	}
 
 	async getNote(id: string) {
-		const note = await client.notes[':id'].$get({ param: { id } });
+		const res = await client.notes[':id'].$get({ param: { id } });
+
+		if (!res.ok) {
+			throw new Error('Note not found');
+		}
+
+		const note = await res.json();
 		return note;
+	}
+
+	async decryptNote(encryptedContent: string, base64Key: string) {
+		const [ivString, cipherString] = encryptedContent.split('.');
+
+		const key = await importKeyFromBase64(base64Key);
+		const iv = base64ToBuffer(ivString);
+		const cipherText = base64ToBuffer(cipherString);
+
+		return await decryptData(key, cipherText, iv);
 	}
 }
 

@@ -31,7 +31,7 @@ export async function encryptData(key: CryptoKey, plainText: string) {
 export async function decryptData(
 	key: CryptoKey,
 	cipherText: ArrayBuffer,
-	iv: ArrayBufferView<ArrayBuffer>
+	iv: ArrayBuffer
 ) {
 	const decryptedData = await subtle.decrypt(
 		{
@@ -55,3 +55,32 @@ export const exportKeyToBase64 = async (key: CryptoKey) => {
 
 export const bufferToBase64 = (buf: ArrayBuffer | Uint8Array<ArrayBuffer>) =>
 	btoa(String.fromCharCode(...new Uint8Array(buf)));
+
+export const base64ToBuffer = (base64: string) => {
+	const binaryString = atob(base64);
+	const len = binaryString.length;
+	const bytes = new Uint8Array(len);
+	for (let i = 0; i < len; i++) {
+		bytes[i] = binaryString.charCodeAt(i);
+	}
+	return bytes.buffer;
+};
+
+export const importKeyFromBase64 = async (base64Key: string) => {
+	const binaryString = atob(base64Key);
+	const keyBuffer = new Uint8Array(
+		[...binaryString].map(char => char.charCodeAt(0))
+	).buffer;
+
+	const key = await subtle.importKey(
+		'raw',
+		keyBuffer,
+		{
+			name: 'AES-GCM',
+		},
+		true,
+		['encrypt', 'decrypt']
+	);
+
+	return key;
+};

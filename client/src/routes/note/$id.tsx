@@ -1,4 +1,5 @@
 import { notesService } from '@/api/services/notes.service';
+import Header from '@/components/shared/note/header'
 import { useQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
@@ -42,13 +43,7 @@ function RouteComponent() {
 	return (
 		<main className='min-h-screen flex items-center justify-center bg-linear-to-br from-indigo-900 via-slate-900 to-slate-800 px-4'>
 			<div className='w-full max-w-2xl bg-white/5 backdrop-blur rounded-2xl shadow-2xl p-6 border border-white/10'>
-				<header className='mb-4 text-center'>
-					<h1 className='text-2xl font-bold text-white'>View Note</h1>
-					<p className='text-sm text-slate-300 mt-1'>
-						This note is encrypted — paste the key (after the # in your link) if
-						it wasn't provided.
-					</p>
-				</header>
+				<Header />
 
 				<section>
 					{isLoading ? (

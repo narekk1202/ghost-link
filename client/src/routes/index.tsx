@@ -5,7 +5,9 @@ export const Route = createFileRoute('/')({
 });
 
 function Index() {
-	return <div></div>;
+	return (
+		<main className='max-w-7xl min-h-screen flex items-center justify-center'></main>
+	);
 }
 
 export default Index;

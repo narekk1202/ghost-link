@@ -1,7 +1,6 @@
-import type { Hono } from 'hono';
+import type { Env, Hono } from 'hono';
 
 import { registerNoteRoutes } from './note.routes';
 
-export const registerRoutes = (app: Hono) => {
+export const registerRoutes = <T extends Hono<Env>>(app: T) =>
 	registerNoteRoutes(app);
-};

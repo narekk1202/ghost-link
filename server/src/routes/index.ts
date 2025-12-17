@@ -1,7 +1,7 @@
 import type { Hono } from 'hono';
 
-import { registerHelloRoutes } from './hello.routes';
+import { registerNoteRoutes } from './note.routes';
 
 export const registerRoutes = (app: Hono) => {
-	registerHelloRoutes(app);
+	registerNoteRoutes(app);
 };

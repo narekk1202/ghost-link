@@ -26,6 +26,7 @@ export const createNote = async (c: ContextWithValidator<CreateNoteInput>) => {
 };
 
 export const getNote = async (c: Context) => {
+	c.header('Cache-Control', 'no-store, max-age=0')
 	const { id } = c.req.param();
 	const note = await redis.hgetall(`note:${id}`);
 

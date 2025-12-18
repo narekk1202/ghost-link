@@ -18,7 +18,7 @@
     "emitDecoratorMetadata": true,
 
     // Module resolution
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowImportingTsExtensions": false
   },
   "include": ["src/**/*"],

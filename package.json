@@ -1,5 +1,5 @@
 {
-  "name": ".",
+  "name": "ghost-link",
   "version": "0.4.0",
   "description": "A monorepo template built with Bun, Hono, Vite, and React",
   "author": "Steve Simkins",
@@ -39,6 +39,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "hono": "^4.10.8"
+    "hono": "^4.10.8",
+    "turborepo": "^0.0.1"
   }
 }
